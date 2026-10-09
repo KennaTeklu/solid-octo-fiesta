@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Only the foreground-service permission is needed for playback.
+         No network, no storage, no phone state, no audio recording. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".ReaderApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Reader"
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="34">
+
+        <!-- Main activity. Handles text/file/share intents so the user can
+             "share" content from another app straight into Reader. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Reader">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Receive plain text from other apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
+
+            <!-- Receive a single file from other apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <!-- Receive multiple files from other apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <!-- Open files directly (file extension association) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="application/epub+zip" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </intent-filter>
+        </activity>
+
+        <!-- Foreground playback service with MediaSession -->
+        <service
+            android:name=".service.PlaybackService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

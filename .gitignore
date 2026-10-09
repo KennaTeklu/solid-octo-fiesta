@@ -1,0 +1,25 @@
+﻿# Build artifacts
+source/.gradle/
+source/build/
+source/**/build/
+source/.kotlin/
+source/local.properties
+
+# IDE
+.idea/
+*.iml
+
+# Signing keys — never commit
+*.keystore
+*.jks
+*.p12
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Batch zips (temporary)
+*.zip
