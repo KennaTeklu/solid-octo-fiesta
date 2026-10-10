@@ -1,119 +1,124 @@
 #!/usr/bin/env python3
-"""APK verification battery for the font-crash fix (and general integrity).
-
-Checks:
-  1. resources.arsc maps a font entry for EVERY res/font/*.ttf (the original
-     crash was a font resource ID with no arsc backing).
-  2. No code references R.font.* (rendering path is asset-based, resource-ID-free).
-  3. All 13 TTFs present in assets/fonts/ AND res/font/ with valid magic bytes.
-  4. Font entries are STORED uncompressed (openFd path works on device).
-  5. Manifest: package, versionCode/Name, permission set.
-  6. Signature: apksigner verify + cert SHA-256 printout.
-  7. zipalign -c 4 passes.
-Usage: verify_apk.py <apk> <sdk-build-tools-dir> <project-src-dir>
 """
-import subprocess, sys, zipfile, re, os
+verify_apk.py — Batch-2 APK self-check.
 
-apk = sys.argv[1]
-# Build-tools dir + project source dir are auto-detected so the script can run as
-# `python3 verify_apk.py <apk>` from the project root. Both can still be overridden
-# positionally (apk, build-tools, src) for the legacy 3-arg invocation.
-bt = sys.argv[2] if len(sys.argv) > 2 else (
-    os.environ.get("ANDROID_HOME", "/home/z/my-project/android-sdk") + "/build-tools/34.0.0"
-)
-src = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "app", "src", "main")
-AAPT2 = os.path.join(bt, "aapt2")
-APKSIGNER = os.path.join(bt, "apksigner")
-ZIPALIGN = os.path.join(bt, "zipalign")
-fails = []
+Runs the four sub-checks the client cares about:
+  1. APK file exists and is non-empty.
+  2. aapt2 dump badging shows the expected versionCode / versionName / package.
+  3. apksigner verify passes AND the signer cert SHA-256 matches the
+     required uber-apk-signer debug key.
+  4. The APK's SHA-256 differs from the previous batch's hash.
 
-def check(name, cond, detail=""):
-    print(("  PASS  " if cond else "  FAIL  ") + name + (f"  [{detail}]" if detail else ""))
-    if not cond: fails.append(name)
+Exit code 0 = pass; non-zero = fail. Prints a short summary.
 
-EXPECTED_TTF = {"fa_brands.ttf","fa_regular.ttf","fa_solid.ttf","inter_400.ttf","inter_500.ttf",
-    "inter_600.ttf","inter_700.ttf","jetbrainsmono_400.ttf","jetbrainsmono_500.ttf","jetbrainsmono_700.ttf",
-    "spacegrotesk_500.ttf","spacegrotesk_600.ttf","spacegrotesk_700.ttf"}
+Usage: python3 verify_apk.py path/to/app-release.apk
+"""
+import hashlib
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 
-print("== 1. resources.arsc font table ==")
-dump = subprocess.run([AAPT2, "dump", "resources", apk], capture_output=True, text=True).stdout
-entries = re.findall(r"resource (0x7f[0-9a-f]{6}) font/([a-z0-9_]+)\n\s*\(\) \(file\) (res/font/[a-z0-9_.]+)", dump)
-font_map = {n: (rid, path) for rid, n, path in entries}
-res_font_dir = os.path.join(src, "res", "font")
-local_ttf = {f for f in os.listdir(res_font_dir) if f.endswith(".ttf")} if os.path.isdir(res_font_dir) else set()
-check("arsc maps every res/font ttf", local_ttf and {n + ".ttf" for n in font_map} == local_ttf,
-      f"arsc={sorted(font_map)}")
-check("no XML font descriptors in arsc", "font/" not in re.sub(r"font/([a-z0-9_]+)", "", dump)[:0] or True)
+REQUIRED_CERT_SHA256 = "1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953"
+PREVIOUS_BATCH_HASH = "7887eeafa728a76da5ae79617af24dff3ba6835cee4b697f11fcc7fa71f698db4"
 
-print("== 2. code R.font references ==")
-rfont_refs = []
-for root, _, files in os.walk(os.path.join(src, "java")):
-    for f in files:
-        if f.endswith(".kt") or f.endswith(".java"):
-            s = open(os.path.join(root, f), encoding="utf-8", errors="ignore").read()
-            rfont_refs += [(f, m) for m in re.findall(r"R\.font\.\w+", s)]
-check("no R.font.* references in code (asset-based pipeline)", not rfont_refs, f"found {rfont_refs}")
+EXPECTED_VERSION_CODE = "2"
+EXPECTED_VERSION_NAME = "1.0.1"
+EXPECTED_PACKAGE = "app.reader"
 
-print("== 3. bundled TTFs ==")
-z = zipfile.ZipFile(apk)
-names = z.namelist()
-assets_fonts = {n.split("/")[-1] for n in names if n.startswith("assets/fonts/") and n.endswith(".ttf")}
-res_fonts = {n.split("/")[-1] for n in names if n.startswith("res/font/") and n.endswith(".ttf")}
-check("assets/fonts has all 13 TTFs", assets_fonts == EXPECTED_TTF, f"missing {EXPECTED_TTF - assets_fonts}")
-check("res/font has all 13 TTFs", res_fonts == EXPECTED_TTF, f"missing {EXPECTED_TTF - res_fonts}")
-check("arsc maps every res/font file", {os.path.basename(p) for _, p in font_map.values()} == res_fonts)
-bad_magic = []
-for n in names:
-    if (n.startswith("assets/fonts/") or n.startswith("res/font/")) and n.endswith(".ttf"):
-        head = z.open(n).read(4)
-        if not (head == b"\x00\x01\x00\x00" or head[:1] in (b"t", b"O")):
-            bad_magic.append(n)
-check("all bundled TTFs have valid magic bytes", not bad_magic, f"{bad_magic}")
 
-print("== 4. storage/compression ==")
-compressed = [i.filename for i in z.infolist()
-              if (i.filename.startswith("assets/fonts/") or i.filename.startswith("res/font/"))
-              and i.filename.endswith(".ttf") and i.compress_type != zipfile.ZIP_STORED]
-check("TTFs stored uncompressed", not compressed, f"{compressed}")
-check("resources.arsc present", "resources.arsc" in names)
+def run(cmd: list[str]) -> tuple[int, str, str]:
+    """Run [cmd], return (returncode, stdout, stderr) — combined output."""
+    p = subprocess.run(cmd, capture_output=True, text=True)
+    return p.returncode, p.stdout, p.stderr
 
-print("== 5. manifest ==")
-badging = subprocess.run([AAPT2, "dump", "badging", apk], capture_output=True, text=True).stdout
-pkg = re.search(r"package: name='([^']+)' versionCode='(\d+)' versionName='([^']+)'", badging)
-check("package com.peakform.fitness", pkg and pkg.group(1) == "com.peakform.fitness")
-vc = pkg.group(2) if pkg else "?"
-vn = pkg.group(3) if pkg else "?"
-check(f"versionCode {vc}", vc.isdigit() and int(vc) >= 3, vc)
-check(f"versionName {vn}", bool(vn), vn)
-perms = re.findall(r"uses-permission: name='([^']+)'", badging)
-# 1.4.0: POST_NOTIFICATIONS (real system reminders) + Health Connect write permission
-# (exercise sessions, write-only) were client-approved additions. Each is documented
-# in CHANGES.md § Permissions. VIBRATE remains the only legacy permission.
-allowed = {
-    "android.permission.VIBRATE",
-    "com.peakform.fitness.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
-    "android.permission.POST_NOTIFICATIONS",
-    "android.permission.health.WRITE_EXERCISE",
-    # androidx.work merges these four into every app that uses WorkManager (NA1);
-    # they are library-manifest entries, not app declarations.
-    "android.permission.WAKE_LOCK",
-    "android.permission.ACCESS_NETWORK_STATE",
-    "android.permission.RECEIVE_BOOT_COMPLETED",
-    "android.permission.FOREGROUND_SERVICE",
-}
-# versionCode floor: 1.4.0 ships code 10 (client requires >= 8)
-check("only VIBRATE permission (real)", all(p in allowed for p in perms), f"{perms}")
 
-print("== 6. signature ==")
-sig = subprocess.run([APKSIGNER, "verify", "--print-certs", apk], capture_output=True, text=True)
-check("apksigner verify", sig.returncode == 0, sig.stderr[:100])
-m = re.search(r"SHA-256 digest: ([0-9a-f]{64})", sig.stdout)
-print("  cert SHA-256:", m.group(1) if m else "?")
+def find_tool(name: str, env_var: str | None = None) -> str | None:
+    if env_var and os.environ.get(env_var):
+        candidate = os.environ[env_var]
+        if os.path.exists(candidate):
+            return candidate
+    return shutil.which(name)
 
-print("== 7. zipalign ==")
-za = subprocess.run([ZIPALIGN, "-c", "4", apk], capture_output=True, text=True)
-check("zipalign -c 4", za.returncode == 0, za.stdout[:100])
 
-print()
-print("RESULT: " + ("ALL CHECKS PASSED" if not fails else f"FAILURES: {fails}"))
-sys.exit(1 if fails else 0)
+def main() -> int:
+    if len(sys.argv) != 2:
+        print("Usage: verify_apk.py <apk>")
+        return 2
+    apk = Path(sys.argv[1])
+    if not apk.exists() or apk.stat().st_size == 0:
+        print(f"FAIL: APK not found or empty: {apk}")
+        return 1
+
+    failures = 0
+
+    # --- 1. aapt2 dump badging ---
+    aapt2 = find_tool("aapt2", "AAPT2_PATH") or shutil.which("aapt2")
+    if not aapt2:
+        print("FAIL: aapt2 not found on PATH (set AAPT2_PATH or install build-tools)")
+        failures += 1
+    else:
+        rc, out, err = run([aapt2, "dump", "badging", str(apk)])
+        first = (out or err).splitlines()[0] if (out or err) else ""
+        print(f"[1] aapt2 dump badging (first line):")
+        print(f"    {first}")
+        if rc != 0:
+            print("    FAIL: aapt2 returned non-zero")
+            failures += 1
+        else:
+            ok = (
+                f"versionCode='{EXPECTED_VERSION_CODE}'" in first
+                and f"versionName='{EXPECTED_VERSION_NAME}'" in first
+                and f"name='{EXPECTED_PACKAGE}'" in first
+            )
+            print(f"    -> versionCode/versionName/package match expected: {ok}")
+            if not ok:
+                failures += 1
+
+    # --- 2. apksigner verify --print-certs ---
+    apksigner = find_tool("apksigner", "APKSIGNER_PATH") or shutil.which("apksigner")
+    if not apksigner:
+        print("FAIL: apksigner not found on PATH")
+        failures += 1
+    else:
+        rc, out, err = run([apksigner, "verify", "--print-certs", str(apk)])
+        print(f"[2] apksigner verify --print-certs:")
+        for line in (out + err).splitlines():
+            if "SHA-256" in line or "Verifies" in line or "verified" in line:
+                print(f"    {line.strip()}")
+        if rc != 0:
+            print(f"    FAIL: apksigner returned non-zero ({rc})")
+            failures += 1
+        elif REQUIRED_CERT_SHA256 not in (out + err).lower():
+            print(f"    FAIL: required cert SHA-256 not found in output")
+            failures += 1
+        else:
+            print(f"    -> cert SHA-256 matches required value")
+
+    # --- 3. sha256sum ---
+    h = hashlib.sha256()
+    with apk.open("rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    digest = h.hexdigest()
+    print(f"[3] sha256sum {apk.name}:")
+    print(f"    {digest}  {apk.name}")
+    if digest.lower() == PREVIOUS_BATCH_HASH:
+        print(f"    FAIL: hash matches previous batch's hash — APK must differ")
+        failures += 1
+    else:
+        print(f"    -> differs from previous batch hash ({PREVIOUS_BATCH_HASH[:12]}…) ✓")
+
+    # --- Summary ---
+    print()
+    if failures == 0:
+        print(f"RESULT: PASS  ({apk.name})")
+        return 0
+    else:
+        print(f"RESULT: FAIL  ({failures} check(s) failed)")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

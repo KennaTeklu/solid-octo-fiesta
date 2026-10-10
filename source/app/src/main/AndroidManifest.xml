@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Only the foreground-service permission is needed for playback.
+         No network, no storage, no phone state, no audio recording. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <!-- Health Connect: write-only exercise sessions; no read permissions are declared. -->
-    <uses-permission android:name="android.permission.health.WRITE_EXERCISE" />
 
     <application
-        android:name=".ProApp"
-        android:allowBackup="false"
+        android:name=".ReaderApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
-        android:theme="@style/Theme.Pro"
+        android:theme="@style/Theme.Reader"
         android:enableOnBackInvokedCallback="true"
-        android:usesCleartextTraffic="false">
+        tools:targetApi="34">
 
+        <!-- Main activity. Handles text/file/share intents so the user can
+             "share" content from another app straight into Reader. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|uiMode">
+            android:theme="@style/Theme.Reader">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- Share-to-app (NA6): receive pasted/shared text and offer a healed JSON import. -->
+
+            <!-- Receive plain text from other apps -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/*" />
             </intent-filter>
-            <!-- Launcher shortcuts (NA13) -->
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
+
+            <!-- Receive a single file from other apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <!-- Receive multiple files from other apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <!-- Open files directly (file extension association) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="application/epub+zip" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </intent-filter>
         </activity>
 
-        <!-- Home-screen widget (NA2) -->
-        <receiver
-            android:name=".ui.widget.ProWidgetReceiver"
-            android:exported="true"
-            android:label="Pro — streak">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/pro_widget_info" />
-        </receiver>
-
-        <!-- Quick-settings tile (NA3) -->
+        <!-- Foreground playback service with MediaSession -->
         <service
-            android:name=".ui.ProTileService"
-            android:exported="true"
-            android:icon="@drawable/ic_stat_pro"
-            android:label="Pro — Train"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:name=".service.PlaybackService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
         </service>
-
-        <!-- Screenshot-harness host (inert; used by the JVM verification battery) -->
-        <activity
-            android:name=".EmptyTestActivity"
-            android:exported="false" />
-
-        <!-- Health Connect rationale (NA9) -->
-        <activity
-            android:name=".HCPermissionRationaleActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
-            </intent-filter>
-        </activity>
     </application>
+
 </manifest>

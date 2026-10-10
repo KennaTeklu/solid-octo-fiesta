@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.Pro" parent="android:Theme.Material.NoActionBar">
-        <item name="android:windowBackground">@color/pro_window_bg</item>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base theme — Compose handles most of the visuals, this just bootstraps the activity window -->
+    <style name="Theme.Reader" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
+    </style>
+
+    <style name="Theme.Reader.Splash" parent="Theme.Reader">
+        <item name="android:windowBackground">@color/ic_launcher_background</item>
     </style>
 </resources>

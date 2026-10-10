@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resource file paths for FileProvider and external access. -->
+<paths>
+    <files-path name="documents" path="documents/" />
+    <cache-path name="cache" path="." />
+</paths>
