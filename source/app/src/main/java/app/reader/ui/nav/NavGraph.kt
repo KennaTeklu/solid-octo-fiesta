@@ -21,6 +21,10 @@ import app.reader.ui.reader.ReaderScreen
 import app.reader.ui.reader.ReaderViewModel
 import app.reader.ui.settings.SettingsScreen
 import app.reader.ui.settings.SettingsViewModel
+import app.reader.ui.voice.TtsEnginePickerScreen
+import app.reader.ui.voice.TtsEnginePickerViewModel
+import app.reader.ui.voice.VoicePickerScreen
+import app.reader.ui.voice.VoicePickerViewModel
 
 @Composable
 fun ReaderNavHost(initialIntake: Intake?) {
@@ -106,6 +110,25 @@ fun ReaderNavHost(initialIntake: Intake?) {
         composable(Dest.Settings.route) {
             val vm: SettingsViewModel = viewModel()
             SettingsScreen(
+                vm = vm,
+                onBack = { navController.popBackStack() },
+                onOpenVoicePicker = { navController.navigate(Dest.VoicePicker.route) },
+                onOpenEnginePicker = { navController.navigate(Dest.TtsEnginePicker.route) }
+            )
+        }
+
+        composable(Dest.VoicePicker.route) {
+            val vm: VoicePickerViewModel = viewModel()
+            VoicePickerScreen(
+                vm = vm,
+                onBack = { navController.popBackStack() },
+                onOpenEnginePicker = { navController.navigate(Dest.TtsEnginePicker.route) }
+            )
+        }
+
+        composable(Dest.TtsEnginePicker.route) {
+            val vm: TtsEnginePickerViewModel = viewModel()
+            TtsEnginePickerScreen(
                 vm = vm,
                 onBack = { navController.popBackStack() }
             )

@@ -116,7 +116,12 @@ class PlaybackService : Service() {
         val settings = SettingsRepository.get(this)
         settingsJob?.cancel()
         settingsJob = scope.launch {
-            combine(settings.speechRate, settings.pitch, settings.voice) { _, _, _ -> Unit }.collect {
+            combine(
+                settings.speechRate,
+                settings.pitch,
+                settings.speechVolume,
+                settings.voice
+            ) { _, _, _, _ -> Unit }.collect {
                 controller.refreshVoiceSettings()
             }
         }
@@ -150,6 +155,7 @@ class PlaybackService : Service() {
             is PlaybackState.Ready -> PlaybackStateCompat.STATE_PAUSED
             is PlaybackState.Loading -> PlaybackStateCompat.STATE_BUFFERING
             is PlaybackState.Ended -> PlaybackStateCompat.STATE_STOPPED
+            is PlaybackState.MissingVoice -> PlaybackStateCompat.STATE_ERROR
             is PlaybackState.Error -> PlaybackStateCompat.STATE_ERROR
             PlaybackState.Idle -> PlaybackStateCompat.STATE_NONE
         }
@@ -188,6 +194,7 @@ class PlaybackService : Service() {
             is PlaybackState.Ready -> state.title
             is PlaybackState.Ended -> "Finished"
             is PlaybackState.Loading -> "Loading…"
+            is PlaybackState.MissingVoice -> "Voice missing"
             is PlaybackState.Error -> "Playback error"
             PlaybackState.Idle -> "Reader"
         }
@@ -224,6 +231,7 @@ class PlaybackService : Service() {
         is PlaybackState.Ready -> "Ready"
         is PlaybackState.Loading -> "Loading…"
         is PlaybackState.Ended -> "Reached the end"
+        is PlaybackState.MissingVoice -> "Voice missing for ${state.languageDisplayName}"
         is PlaybackState.Error -> state.message
         PlaybackState.Idle -> ""
     }

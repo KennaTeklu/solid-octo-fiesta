@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
 import app.reader.data.db.ReaderDatabase
+import app.reader.data.repo.CloudKeyRepository
 import app.reader.data.repo.DocumentRepository
 import app.reader.data.repo.SettingsRepository
 
@@ -24,6 +25,7 @@ class ReaderApp : Application() {
         _database = ReaderDatabase.get(this)
         _settings = SettingsRepository.get(this)
         _docs = DocumentRepository.get(this)
+        _cloudKeys = CloudKeyRepository.get(this)
     }
 
     private fun createPlaybackChannel() {
@@ -51,10 +53,13 @@ class ReaderApp : Application() {
         private var _settings: SettingsRepository? = null
         @Volatile
         private var _docs: DocumentRepository? = null
+        @Volatile
+        private var _cloudKeys: CloudKeyRepository? = null
 
         fun get(): ReaderApp = instance!!
         val database: ReaderDatabase get() = _database!!
         val settingsRepository: SettingsRepository get() = _settings!!
         val documentRepository: DocumentRepository get() = _docs!!
+        val cloudKeyRepository: CloudKeyRepository get() = _cloudKeys!!
     }
 }

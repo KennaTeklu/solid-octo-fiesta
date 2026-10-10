@@ -71,6 +71,7 @@ import app.reader.parser.TocEntry
 import app.reader.tts.PlaybackState
 import app.reader.ui.theme.SentenceHighlight
 import app.reader.ui.theme.SentenceHighlightDark
+import app.reader.ui.voice.MissingVoiceDialog
 import java.text.DateFormat
 import java.util.Date
 
@@ -89,15 +90,27 @@ fun ReaderScreen(
     val fontScale by vm.fontScale.collectAsStateWithLifecycle()
     val autoScroll by vm.autoScroll.collectAsStateWithLifecycle()
     val pdfStream by vm.pdfStream.collectAsStateWithLifecycle()
+    val speechRate by vm.speechRate.collectAsStateWithLifecycle()
+    val pitch by vm.pitch.collectAsStateWithLifecycle()
+    val speechVolume by vm.speechVolume.collectAsStateWithLifecycle()
+    val rateMin by vm.rateMin.collectAsStateWithLifecycle()
+    val rateMax by vm.rateMax.collectAsStateWithLifecycle()
+    val rateStep by vm.rateStep.collectAsStateWithLifecycle()
 
     val listState = rememberLazyListState()
     var sheet by remember { mutableStateOf<ReaderSheet?>(null) }
+    var showMissingVoiceDialog by remember { mutableStateOf(false) }
 
     // True while a PDF is being parsed page-by-page (for this docId).
     val pdfLoading = pdfStream as? PdfStreamingParser.State.Loading
     val pdfStreamDocId = (pdfStream as? PdfStreamingParser.State.Loading)?.docId
         ?: (pdfStream as? PdfStreamingParser.State.Done)?.docId
     val isParsingThisPdf = pdfLoading != null && pdfStreamDocId == docId
+
+    // Surface the missing-voice dialog when state is MissingVoice.
+    LaunchedEffect(playback) {
+        showMissingVoiceDialog = playback is PlaybackState.MissingVoice
+    }
 
     Scaffold(
         topBar = {
@@ -133,7 +146,16 @@ fun ReaderScreen(
                 onNextSentence = vm::skipNextSentence,
                 onPrevParagraph = vm::skipPrevParagraph,
                 onNextParagraph = vm::skipNextParagraph,
-                onStop = vm::stop
+                onStop = vm::stop,
+                rate = speechRate,
+                pitch = pitch,
+                volume = speechVolume,
+                rateMin = rateMin,
+                rateMax = rateMax,
+                rateStep = rateStep,
+                onRateChange = vm::setRateLive,
+                onPitchChange = vm::setPitchLive,
+                onVolumeChange = vm::setVolumeLive
             )
         }
     ) { padding ->
@@ -162,6 +184,22 @@ fun ReaderScreen(
             // underneath as soon as the first page is available.
             ProgressOverlay(state = if (isParsingThisPdf) pdfLoading else null)
         }
+    }
+
+    // Missing-voice dialog (TTS-06)
+    val missingState = playback as? PlaybackState.MissingVoice
+    if (showMissingVoiceDialog && missingState != null) {
+        MissingVoiceDialog(
+            languageDisplayName = missingState.languageDisplayName,
+            onPickAlternative = {
+                showMissingVoiceDialog = false
+                // The reader screen doesn't navigate to the voice picker
+                // directly — that lives under Settings. The user can also
+                // retry playback after installing a voice (press Play again).
+                onBack()
+            },
+            onDismiss = { showMissingVoiceDialog = false }
+        )
     }
 
     val currentSheet = sheet

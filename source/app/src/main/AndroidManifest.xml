@@ -9,6 +9,15 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Batch 7 — TTS engine discovery. On API 30+ apps can no longer see
+         other apps' services unless they declare a <queries> block. We need
+         this to populate the TTS engine picker (TTS-05). -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_DATA_SERVICE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".ReaderApp"
         android:allowBackup="true"

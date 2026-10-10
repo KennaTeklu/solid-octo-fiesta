@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-verify_apk.py — Batch-2 APK self-check.
+verify_apk.py — Batch-3 APK self-check.
 
 Runs the four sub-checks the client cares about:
   1. APK file exists and is non-empty.
@@ -21,10 +21,10 @@ import sys
 from pathlib import Path
 
 REQUIRED_CERT_SHA256 = "1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953"
-PREVIOUS_BATCH_HASH = "7887eeafa728a76da5ae79617af24dff3ba6835cee4b697f11fcc7fa71f698db4"
+PREVIOUS_BATCH_HASH = "b9d85d6799d6e7c69a99eb9a714d9b050eeccf0aaddf1e198a62d4d04f64a208"
 
-EXPECTED_VERSION_CODE = "2"
-EXPECTED_VERSION_NAME = "1.0.1"
+EXPECTED_VERSION_CODE = "3"
+EXPECTED_VERSION_NAME = "1.0.2"
 EXPECTED_PACKAGE = "app.reader"
 
 

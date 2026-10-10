@@ -13,6 +13,9 @@ import app.reader.parser.SentenceRange
  * - [Playing] : TTS is reading aloud.
  * - [Paused] : TTS was playing, now paused.
  * - [Ended] : the document finished; we are parked at the end.
+ * - [MissingVoice] : the loaded document's language has no installed TTS voice.
+ *   Batch 7 — TTS-06. The UI surfaces a dialog offering a Play Store link or
+ *   an alternative voice. The user can dismiss it; playback is parked.
  * - [Error] : something went wrong (e.g. no voice installed).
  */
 sealed interface PlaybackState {
@@ -30,6 +33,7 @@ sealed interface PlaybackState {
     ) : PlaybackState
     data class Paused(val docId: String, val title: String, val chapter: Int, val sentence: Int, val total: Int, val done: Int) : PlaybackState
     data class Ended(val docId: String) : PlaybackState
+    data class MissingVoice(val docId: String, val languageTag: String, val languageDisplayName: String) : PlaybackState
     data class Error(val message: String) : PlaybackState
 }
 

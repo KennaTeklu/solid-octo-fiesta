@@ -14,4 +14,6 @@ sealed interface Dest {
     data object Queue : Dest { const val ROUTE = "queue"; override val route = ROUTE }
     data object Settings : Dest { const val ROUTE = "settings"; override val route = ROUTE }
     data object Paste : Dest { const val ROUTE = "paste"; override val route = ROUTE }
+    data object VoicePicker : Dest { const val ROUTE = "voice_picker"; override val route = ROUTE }
+    data object TtsEnginePicker : Dest { const val ROUTE = "tts_engine_picker"; override val route = ROUTE }
 }

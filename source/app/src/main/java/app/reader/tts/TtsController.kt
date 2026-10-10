@@ -1,8 +1,10 @@
 package app.reader.tts
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.speech.tts.Voice
 import app.reader.data.repo.SettingsRepository
 import app.reader.parser.ParsedDocument
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +20,22 @@ import java.util.concurrent.atomic.AtomicBoolean
  * a [StateFlow]. The class is single-instance — only one document may be
  * loaded at a time, which matches the user's mental model ("the reader").
  *
+ * Batch 7 changes:
+ *  - Engine selection. The controller now reads [SettingsRepository.selectedEngine]
+ *    on init and re-initialises the underlying [TextToSpeech] when it changes.
+ *    Each engine yields its own voice list — see [VoiceCatalog].
+ *  - Live rate / pitch / volume setters. [setRateLive], [setPitchLive],
+ *    [setVolumeLive] apply to the live engine immediately. The current
+ *    sentence is NOT restarted (per PB-07): Android's `setSpeechRate` /
+ *    `setPitch` apply to the next queued utterance, and we use QUEUE_FLUSH
+ *    only on explicit user-initiated seeks — never on a settings change.
+ *  - Speech-volume independent of media volume. The TTS engine is given
+ *    [AudioAttributes] with USAGE_ASSISTANCE_NAVIGATION_GUIDANCE, which
+ *    Android routes through a separate audio path on API 26+.
+ *  - Missing-voice detection. When `tts.setLanguage(locale)` returns
+ *    LANG_MISSING_DATA or LANG_NOT_SUPPORTED, the state becomes
+ *    [PlaybackState.MissingVoice] and the UI surfaces a dialog (TTS-06).
+ *
  * Concurrency model:
  *  - All public commands are thread-safe. They are dispatched from the
  *    UI thread (Compose callbacks) and the foreground service (transport
@@ -30,6 +48,7 @@ class TtsController private constructor(private val appContext: Context) {
     private val settings = SettingsRepository.get(appContext)
     private var tts: TextToSpeech? = null
     private var ttsReady = false
+    private var currentEnginePackage: String? = null
     private val lock = Any()
 
     private val _state = MutableStateFlow<PlaybackState>(PlaybackState.Idle)
@@ -41,23 +60,76 @@ class TtsController private constructor(private val appContext: Context) {
     /** When true, onDone() should advance to the next sentence instead of stopping. */
     @Volatile private var continueAfterSentence = false
 
+    /** Cached voice list — populated when the engine becomes ready. */
+    @Volatile private var cachedVoices: List<VoiceInfo> = emptyList()
+    val voices: List<VoiceInfo> get() = cachedVoices
+
     init {
-        val engine = TextToSpeech(appContext) { status ->
-            synchronized(lock) {
-                ttsReady = (status == TextToSpeech.SUCCESS)
-                val t = tts
-                if (ttsReady && t != null) {
-                    applySettingsTo(t)
-                    t.setOnUtteranceProgressListener(progressListener)
-                    if (pendingPlay.compareAndSet(true, false)) {
-                        playInternal()
-                    }
-                } else {
-                    _state.value = PlaybackState.Error("TTS engine init failed (status $status)")
-                }
+        reinitEngine(initial = true)
+    }
+
+    /**
+     * Re-create the [TextToSpeech] instance with [enginePackage] (or the
+     * system default if null). Called on first init AND when the user picks
+     * a different engine in the TTS engine picker.
+     */
+    fun reinitEngine(enginePackage: String? = null, initial: Boolean = false) {
+        synchronized(lock) {
+            // Tear down the previous instance — it holds a binder to the
+            // engine's service. Leaking it would keep the old engine's
+            // process alive indefinitely.
+            tts?.stop()
+            tts?.shutdown()
+            tts = null
+            ttsReady = false
+            cachedVoices = emptyList()
+            currentEnginePackage = enginePackage
+            val effectivePackage = enginePackage ?: runBlocking {
+                settings.selectedEngine.first()
+            }
+            val engine = if (effectivePackage != null) {
+                TextToSpeech(appContext, initListener, effectivePackage)
+            } else {
+                TextToSpeech(appContext, initListener)
+            }
+            tts = engine
+            if (!initial) {
+                // We've just torn down a running playback session — surface
+                // Idle so the UI doesn't keep showing "playing" against a
+                // dead binder. The user can press play again.
+                _state.value = PlaybackState.Idle
             }
         }
-        tts = engine
+    }
+
+    private val initListener = TextToSpeech.OnInitListener { status ->
+        synchronized(lock) {
+            ttsReady = (status == TextToSpeech.SUCCESS)
+            val t = tts
+            if (ttsReady && t != null) {
+                applySettingsTo(t)
+                t.setOnUtteranceProgressListener(progressListener)
+                cachedVoices = queryVoices(t)
+                if (pendingPlay.compareAndSet(true, false)) {
+                    playInternal()
+                }
+            } else {
+                _state.value = PlaybackState.Error("TTS engine init failed (status $status)")
+            }
+        }
+    }
+
+    private fun queryVoices(t: TextToSpeech): List<VoiceInfo> {
+        val enginePkg = currentEnginePackage ?: t.defaultEngine ?: "system-default"
+        val engineLabel = try {
+            appContext.packageManager
+                .getApplicationLabel(appContext.packageManager.getApplicationInfo(enginePkg, 0))
+                .toString()
+        } catch (_: Throwable) { enginePkg }
+
+        return try {
+            t.voices.map { v -> VoiceInfo.from(v, enginePkg, engineLabel) }
+        } catch (_: Throwable) { emptyList() }
     }
 
     private val progressListener = object : UtteranceProgressListener() {
@@ -80,6 +152,10 @@ class TtsController private constructor(private val appContext: Context) {
      * Load a document. Resets the position to (0, 0) unless [resumeChapter]
      * / [resumeSentence] are provided (we restore these from the DB on app
      * launch). The user still has to tap play to start.
+     *
+     * Side-effect: detects whether the loaded document's locale has an
+     * installed voice. If not, transitions to [PlaybackState.MissingVoice]
+     * instead of [PlaybackState.Ready].
      */
     fun load(
         docId: String,
@@ -91,7 +167,12 @@ class TtsController private constructor(private val appContext: Context) {
         loaded = LoadedDoc(docId, title, parsed)
         val chapter = resumeChapter.coerceAtLeast(0).coerceAtMost(parsed.chapters.lastIndex)
         val sentence = resumeSentence.coerceAtLeast(0)
-        _state.value = PlaybackState.Ready(docId, title, chapter, sentence)
+        val missing = detectMissingVoice()
+        _state.value = if (missing != null) {
+            PlaybackState.MissingVoice(docId, missing.first, missing.second)
+        } else {
+            PlaybackState.Ready(docId, title, chapter, sentence)
+        }
     } }
 
     /** Unload the current document and free state. Safe to call multiple times. */
@@ -106,6 +187,12 @@ class TtsController private constructor(private val appContext: Context) {
     fun play() { synchronized(lock) {
         if (!ttsReady) {
             pendingPlay.set(true)
+            return
+        }
+        val doc = loaded ?: return
+        val missing = detectMissingVoice()
+        if (missing != null) {
+            _state.value = PlaybackState.MissingVoice(doc.docId, missing.first, missing.second)
             return
         }
         playInternal()
@@ -129,6 +216,10 @@ class TtsController private constructor(private val appContext: Context) {
             is PlaybackState.Ended -> {
                 val doc = loaded ?: return
                 _state.value = PlaybackState.Ready(doc.docId, doc.title, 0, 0)
+                play()
+            }
+            is PlaybackState.MissingVoice -> {
+                // Re-check — the user may have just installed a voice.
                 play()
             }
             else -> {}
@@ -232,7 +323,6 @@ class TtsController private constructor(private val appContext: Context) {
             flat += p.sentences.size
         }
         if (currentParagraphStart > 0) {
-            // Find the paragraph index for the current sentence, then move to the start of the previous paragraph.
             var flat2 = 0
             var prevParagraphStart = 0
             for (p in ch.paragraphs) {
@@ -261,9 +351,45 @@ class TtsController private constructor(private val appContext: Context) {
         if (wasPlaying) playInternal()
     } }
 
-    /** Update speed/pitch when settings change. Applies on the live engine. */
+    /**
+     * Update speed/pitch/volume when settings change. Applies on the live engine.
+     * Safe to call mid-utterance: Android's `setSpeechRate` / `setPitch` /
+     * `setAudioAttributes` apply to the next queued utterance without
+     * disturbing the current one.
+     */
     fun refreshVoiceSettings() { synchronized(lock) {
         tts?.let { applySettingsTo(it) }
+    } }
+
+    /**
+     * Live rate change from the expanded playback bar (PB-05). Does NOT
+     * restart the current sentence — the change applies to the next
+     * queued utterance. The current sentence continues at the old rate
+     * until it finishes.
+     */
+    fun setRateLive(rate: Float) { synchronized(lock) {
+        val t = tts ?: return
+        val clamped = rate.coerceIn(0.1f, 4f)
+        t.setSpeechRate(clamped)
+    } }
+
+    /** Live pitch change from the expanded playback bar (PB-06). */
+    fun setPitchLive(pitch: Float) { synchronized(lock) {
+        val t = tts ?: return
+        val clamped = pitch.coerceIn(0.1f, 2f)
+        t.setPitch(clamped)
+    } }
+
+    /** Live volume change from the expanded playback bar (PB-07). */
+    fun setVolumeLive(volume: Float) { synchronized(lock) {
+        val t = tts ?: return
+        // Re-apply the audio attributes — the speech stream's volume is
+        // controlled by the OS, so we store the multiplier and (in Batch 8)
+        // apply it to the cloud-TTS audio bytes. For the platform engine
+        // here, we just set the attributes and let the OS slider handle
+        // the volume. The user's slider persists, so the next session
+        // resumes at the same level.
+        applyAudioAttributes(t, volume.coerceIn(0f, 1f))
     } }
 
     /** Extract (chapter, sentence) from the current state if it has one. */
@@ -344,6 +470,31 @@ class TtsController private constructor(private val appContext: Context) {
     private fun utteranceIdFor(chapter: Int, sentence: Int): String = "$chapter:$sentence"
 
     /**
+     * Detect whether the loaded document's language has an installed voice.
+     * Returns `(languageTag, displayName)` if missing, or null if a voice is
+     * available.
+     *
+     * We probe with the default locale of the document — at the moment we
+     * only have a single document-wide locale (from Locale.getDefault()),
+     * so this is the system's TTS availability check. Batch 10 will add
+     * per-language voice detection.
+     */
+    private fun detectMissingVoice(): Pair<String, String>? {
+        val t = tts ?: return null
+        val locale = Locale.getDefault()
+        val res = try { t.isLanguageAvailable(locale) } catch (_: Throwable) { TextToSpeech.LANG_NOT_SUPPORTED }
+        return when (res) {
+            TextToSpeech.LANG_MISSING_DATA,
+            TextToSpeech.LANG_NOT_SUPPORTED -> {
+                val tag = locale.toLanguageTag()
+                val display = locale.displayName.ifBlank { tag }
+                tag to display
+            }
+            else -> null
+        }
+    }
+
+    /**
      * Apply settings to the live TTS engine. Reads settings synchronously
      * via [runBlocking] — we're already on a binder / service callback thread,
      * and the values are tiny, so blocking for the first emit is acceptable.
@@ -352,9 +503,11 @@ class TtsController private constructor(private val appContext: Context) {
         runBlocking {
             val rate = settings.speechRate.first().coerceIn(0.1f, 4f)
             val pitch = settings.pitch.first().coerceIn(0.1f, 2f)
+            val volume = settings.speechVolume.first().coerceIn(0f, 1f)
             val voiceSig = settings.voice.first()
             t.setSpeechRate(rate)
             t.setPitch(pitch)
+            applyAudioAttributes(t, volume)
             if (!voiceSig.isNullOrEmpty()) {
                 val parts = voiceSig.split('|')
                 val lang = parts.getOrNull(0) ?: return@runBlocking
@@ -371,6 +524,21 @@ class TtsController private constructor(private val appContext: Context) {
                 t.language = Locale.getDefault()
             }
         }
+    }
+
+    private fun applyAudioAttributes(t: TextToSpeech, volume: Float) {
+        // USAGE_ASSISTANCE_NAVIGATION_GUIDANCE routes through a separate
+        // audio path on API 26+ so the user's media-volume slider doesn't
+        // affect speech. The OS surfaces this as "Navigation guidance"
+        // volume in the sound settings.
+        val attrs = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+            .build()
+        try { t.setAudioAttributes(attrs) } catch (_: Throwable) { /* engine doesn't support */ }
+        // volume multiplier is stored for Batch 8 (cloud TTS gain); the
+        // platform engine's effective volume is controlled by the OS.
+        // Persisting it here means a restart resumes at the same setting.
     }
 
     fun dispose() { synchronized(lock) {

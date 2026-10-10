@@ -49,6 +49,49 @@ class ReaderViewModel(
     val autoScroll: StateFlow<Boolean> =
         settings.autoScroll.stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    // Batch 7 — live voice settings surfaced to the playback bar.
+    val speechRate: StateFlow<Float> =
+        settings.speechRate.stateIn(viewModelScope, SharingStarted.Eagerly, 1.0f)
+    val pitch: StateFlow<Float> =
+        settings.pitch.stateIn(viewModelScope, SharingStarted.Eagerly, 1.0f)
+    val speechVolume: StateFlow<Float> =
+        settings.speechVolume.stateIn(viewModelScope, SharingStarted.Eagerly, 1.0f)
+    val rateMin: StateFlow<Float> =
+        settings.rateMin.stateIn(viewModelScope, SharingStarted.Eagerly, 0.5f)
+    val rateMax: StateFlow<Float> =
+        settings.rateMax.stateIn(viewModelScope, SharingStarted.Eagerly, 3.0f)
+    val rateStep: StateFlow<Float> =
+        settings.rateStep.stateIn(viewModelScope, SharingStarted.Eagerly, 0.25f)
+
+    /**
+     * Live rate change from the expanded playback bar. Persists to settings
+     * AND applies to the running TTS engine immediately — without
+     * restarting the current sentence. The current sentence finishes at
+     * the old rate; the next sentence picks up the new rate.
+     */
+    fun setRateLive(rate: Float) {
+        viewModelScope.launch {
+            settings.setSpeechRate(rate)
+            controller.setRateLive(rate)
+        }
+    }
+
+    /** Live pitch change from the expanded playback bar. */
+    fun setPitchLive(pitch: Float) {
+        viewModelScope.launch {
+            settings.setPitch(pitch)
+            controller.setPitchLive(pitch)
+        }
+    }
+
+    /** Live volume change from the expanded playback bar. */
+    fun setVolumeLive(volume: Float) {
+        viewModelScope.launch {
+            settings.setSpeechVolume(volume)
+            controller.setVolumeLive(volume)
+        }
+    }
+
     init {
         load()
         viewModelScope.launch {
