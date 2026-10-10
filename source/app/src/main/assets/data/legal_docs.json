@@ -1,0 +1,466 @@
+{
+ "terms": {
+  "id": "terms",
+  "short": "Terms",
+  "title": "Terms of Service",
+  "sections": [
+   {
+    "h": "Welcome",
+    "p": [
+     "These Terms are an agreement between you and try4ever.com (\"we\", \"us\") for the fitness application served at fitness.try4ever.com and any offline copies of the same file (the \"App\"). By using the App, checking the agreement box, or generating your first workout, you accept these Terms. If you do not accept them, please stop using the App and delete your local data.",
+     "The App is licensed to you, not sold. Your workout history, notes, and settings belong to you. We store them on your device — not on our servers — unless you explicitly use a connected feature that says otherwise."
+    ]
+   },
+   {
+    "h": "Who can use the App",
+    "p": [
+     "You must be at least 13 years old to use the App on your own. If you are between 13 and 17, a parent or legal guardian must review and accept these Terms and the Safety Agreement with you. The App is not directed to children under 13, and we do not knowingly collect data from them because the App keeps data on-device."
+    ]
+   },
+   {
+    "h": "Subscriptions & licenses",
+    "p": [
+     "The App offers a Free tier and a Pro tier (currently $19 per month, shown at checkout, plus tax where applicable). Pro may also be granted through a license key we issue at our discretion (for example through a free license application).",
+     "Subscriptions renew automatically each month until cancelled. You can cancel at any time from inside the App or by contacting support@try4ever.com; access continues until the end of the paid period. Prices may change with 30 days' notice; changes never apply retroactively to a period you already paid for.",
+     "We may offer free trials. Trials convert to paid access only if we clearly told you so at signup; otherwise they simply end."
+    ]
+   },
+   {
+    "h": "Acceptable use",
+    "p": [
+     "You agree not to:"
+    ],
+    "ul": [
+     "circumvent, disable, or attempt to defeat any license check, trial limit, or security feature of the App;",
+     "reverse-engineer the App except where such restriction is prohibited by law;",
+     "resell, sublicense, or commercially redistribute the App file itself;",
+     "use the App to harass anyone, or to publish content that is unlawful or hateful;",
+     "upload malicious code through any import feature."
+    ]
+   },
+   {
+    "h": "User content",
+    "p": [
+     "Exercises, feedback, and other content you add through the Library Studio remain yours. By using the optional sharing or export features you grant other users of your own device the obvious right to read that content — nothing more. We do not claim ownership of your workout data and we cannot see it."
+    ]
+   },
+   {
+    "h": "Disclaimers",
+    "p": [
+     "THE APP IS PROVIDED \"AS IS\" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING FITNESS FOR A PARTICULAR PURPOSE. We do not warrant that the App will be uninterrupted or error-free. The App provides general fitness guidance, not medical advice; see the Health Disclaimer and Liability Waiver documents."
+    ]
+   },
+   {
+    "h": "Limitation of liability",
+    "p": [
+     "TO THE MAXIMUM EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY TO YOU FOR ANY CLAIM ARISING FROM THE APP IS LIMITED TO THE GREATER OF (A) THE AMOUNT YOU PAID US IN THE 12 MONTHS BEFORE THE CLAIM, OR (B) USD $19. We are not liable for indirect, incidental, special, consequential, or punitive damages, or for lost data — please use the backup feature; it exists for a reason."
+    ]
+   },
+   {
+    "h": "Termination & changes",
+    "p": [
+     "You may stop using the App at any time. We may modify or discontinue the App or any feature; if we discontinue something material to a paid tier, we will refund the unused portion of the current month on request. Sections that by their nature should survive termination (liability, disclaimers, indemnity) do survive."
+    ]
+   },
+   {
+    "h": "Governing law & disputes",
+    "p": [
+     "These Terms are governed by the laws of the State of Arizona, USA, excluding its conflict-of-laws rules. Small claims and consumer protection rights you have where you live are not affected. We will always try to resolve problems informally first — email support@try4ever.com and a human will answer."
+    ]
+   },
+   {
+    "h": "Contact",
+    "p": [
+     "try4ever.com · support@try4ever.com · fitness.try4ever.com. We answer support mail within 5 business days."
+    ]
+   }
+  ]
+ },
+ "privacy": {
+  "id": "privacy",
+  "short": "Privacy",
+  "title": "Privacy Policy",
+  "sections": [
+   {
+    "h": "The short version",
+    "p": [
+     "Your workouts, body data, and settings live in your browser's storage on your device. We do not operate accounts, we do not receive your workout data, and we do not sell anything about you. That is the whole philosophy of this App."
+    ]
+   },
+   {
+    "h": "What is stored, and where",
+    "p": [
+     "The App stores the following categories of data locally (localStorage and IndexedDB in your browser):"
+    ],
+    "ul": [
+     "Profile you choose to enter: name or nickname, birth date, gender, body weight and height, experience, goals;",
+     "Workout history: exercises, sets, reps, weights, effort ratings, notes, timestamps;",
+     "Preferences: theme, reading level, language, power-user settings;",
+     "Consent records: which legal documents you accepted and when;",
+     "License or subscription status: a local indicator that you paid, so the App can unlock features."
+    ]
+   },
+   {
+    "h": "What we receive",
+    "p": [
+     "Nothing by default. Loading the App from fitness.try4ever.com exposes standard web server logs (IP address, user agent, time) which are retained for up to 30 days for security and abuse prevention. If you subscribe, our payment processor receives your payment details — we never see your full card number. If you email support, we receive what you send and use it only to help you."
+    ]
+   },
+   {
+    "h": "Third parties",
+    "p": [
+     "The App loads a small number of public libraries from CDNs (for example fonts and chart libraries). Those providers may see your IP address as part of serving those files. The App itself contains no analytics, no advertising, and no tracking pixels. If a future version adds an optional connected feature, it will be opt-in and disclosed here first."
+    ]
+   },
+   {
+    "h": "Your rights & choices",
+    "p": [
+     "You can export everything (Settings → Export JSON), delete everything (Settings → Reset All Data), or clear site data in your browser at any time. Because we hold no server-side copy, deletion on your device is complete. If you are in the EEA/UK and believe we processed personal data about you, contact support@try4ever.com and we will help; our practical role is usually limited to the server logs described above."
+    ]
+   },
+   {
+    "h": "Children",
+    "p": [
+     "The App is not directed to children under 13. Because data stays on-device, we have no mechanism or desire to collect children's data. If you are a guardian and believe a child under 13 has entered data, delete it via Reset All Data."
+    ]
+   },
+   {
+    "h": "Changes",
+    "p": [
+     "If this policy changes materially we will change its version date and, where feasible, show a notice in the App. The current version always lives in the Legal Center."
+    ]
+   }
+  ]
+ },
+ "waiver": {
+  "id": "waiver",
+  "short": "Waiver",
+  "title": "Liability Waiver & Release",
+  "sections": [
+   {
+    "h": "Please read carefully — this affects your legal rights",
+    "p": [
+     "This Waiver is an agreement between you (and, if you are a minor, your parent or legal guardian who approves on your behalf) and try4ever.com. You accept it when you check the safety box during setup."
+    ]
+   },
+   {
+    "h": "Assumption of risk",
+    "p": [
+     "Physical exercise involves inherent risks, including muscle strains, joint injuries, falls, dizziness, fainting, heart events, and in rare cases serious injury or death. Risks are higher if you use heavy weights, train tired or dehydrated, use poor form, or train with a medical condition you have not disclosed to a professional.",
+     "You voluntarily accept these risks and take responsibility for choosing exercises, weights, and effort levels that are right for your body on each day you train."
+    ]
+   },
+   {
+    "h": "Release",
+    "p": [
+     "To the fullest extent permitted by law, you release try4ever.com and its operators from all claims, liabilities, and causes of action arising out of your use of the App's guidance — including claims caused by our ordinary negligence — except where such release is void or unenforceable by law (for example for gross negligence or willful misconduct, or where you are a consumer with non-waivable statutory rights)."
+    ]
+   },
+   {
+    "h": "What this App is not",
+    "p": [
+     "The App is not a doctor, physical therapist, or certified personal trainer assigned to you. Its weight suggestions are mathematical estimates from population-level formulas and your own entries. It cannot see you, cannot correct your form, and cannot know how you feel. You are the expert on you."
+    ]
+   },
+   {
+    "h": "Minors",
+    "p": [
+     "If you are under 18, a parent or guardian must approve this Waiver. Guardians: you accept it on your own behalf and on behalf of the minor, and you agree to supervise training appropriate to the minor's age."
+    ]
+   },
+   {
+    "h": "Duration",
+    "p": [
+     "This Waiver applies to every use of the App for as long as your consent record remains in the App, including after you stop using the App for claims connected to earlier use."
+    ]
+   }
+  ]
+ },
+ "medical": {
+  "id": "medical",
+  "short": "Health",
+  "title": "Health & Fitness Disclaimer",
+  "sections": [
+   {
+    "h": "Not medical advice",
+    "p": [
+     "All content in the App — exercises, weight ranges, plans, tips, and coach notes — is general fitness information for healthy adults and supervised teens. It is not medical advice, diagnosis, or treatment, and it is not a substitute for a qualified healthcare provider who knows you."
+    ]
+   },
+   {
+    "h": "Ask a professional first if…",
+    "ul": [
+     "you have a heart condition, chest pain, or a family history of early heart disease;",
+     "you are pregnant or recently gave birth;",
+     "you have diabetes, high or low blood pressure, dizziness, or joint problems;",
+     "you take medication that affects heart rate or hydration;",
+     "you are returning from surgery, injury, or a long time without exercise;",
+     "you are under 18 (guardian supervision and pediatric guidance are smart)."
+    ]
+   },
+   {
+    "h": "Stop signals",
+    "p": [
+     "Stop training and seek help if you feel chest pain or pressure, unusual shortness of breath, sudden dizziness or confusion, sharp joint or bone pain, or numbness. Mild muscle burn and mild next-day soreness are normal; sharp pain is not \"good form with extra steps\" — it is a stop sign."
+    ]
+   },
+   {
+    "h": "Soreness vs. injury",
+    "p": [
+     "Soreness that peaks a day or two after training and eases with light movement is usually normal. Pain that is sharp, one-sided, localized to a joint, or worsening day over day is a signal to rest and, if it persists, to see a professional."
+    ]
+   }
+  ]
+ },
+ "risk": {
+  "id": "risk",
+  "short": "Risk",
+  "title": "Assumption of Risk Acknowledgment",
+  "sections": [
+   {
+    "h": "Mechanics of this App",
+    "p": [
+     "The App derives suggested weights from your logged repetitions and set counts using established estimation formulas, clamped by per-muscle fiber profiles. These are heuristics: real bars can be mis-loaded, plates can be mismarked, and fatigue can hide a bad day."
+    ]
+   },
+   {
+    "h": "Your acknowledgments",
+    "p": [
+     "You acknowledge that: suggested weights are estimates and must be sanity-checked by you; you will use spotters or safety pins for heavy barbell work where available; you will secure collars and check equipment before loading; you will keep your training area clear of trip hazards; and you will not train to failure on exercises where failure could trap or drop weight on you."
+    ]
+   },
+   {
+    "h": "Progression philosophy",
+    "p": [
+     "The App's plans progress gradually on purpose. Skipping ahead, adding large jumps, or ignoring the recovery guidance increases injury risk and is done at your choice and risk."
+    ]
+   }
+  ]
+ },
+ "refunds": {
+  "id": "refunds",
+  "short": "Refunds",
+  "title": "Refund & Cancellation Policy",
+  "sections": [
+   {
+    "h": "Cancelling",
+    "p": [
+     "You can cancel a subscription any time from the App's Plan screen or by emailing support@try4ever.com. Cancellation stops future charges immediately; your benefits continue until the end of the period you already paid for. No phone calls, no dark patterns, no retention interrogation."
+    ]
+   },
+   {
+    "h": "Refunds",
+    "p": [
+     "If something went wrong — a double charge, a charge you did not authorize, or a feature that was materially broken for your whole billing month — email support@try4ever.com within 60 days and we will make it right, including full refunds where fair. Otherwise subscription fees for a period you used are generally non-refundable, because the App is delivered instantly and your data never depended on our servers.",
+     "One-time license keys (including free promotional keys) are not refundable, but they are transferable to another one of your own devices by re-entering the key."
+    ]
+   },
+   {
+    "h": "Chargebacks",
+    "p": [
+     "Please contact us before filing a chargeback — we resolve almost everything faster than a bank can. Chargebacks filed without contacting us first may result in license deactivation until the dispute is resolved."
+    ]
+   }
+  ]
+ },
+ "cookies": {
+  "id": "cookies",
+  "short": "Storage",
+  "title": "Cookies & Local Storage Notice",
+  "sections": [
+   {
+    "h": "We use no tracking cookies",
+    "p": [
+     "The App sets no advertising or analytics cookies. It uses browser local storage and IndexedDB as a database — that is how a file-based app remembers your workouts without an account."
+    ]
+   },
+   {
+    "h": "Inventory",
+    "p": [
+     "Main storage keys and their purposes:"
+    ],
+    "ul": [
+     "workoutData — your entire workout history, profile, and app state;",
+     "p4_theme / p4_vocab / p4_lang — appearance, reading level, language preferences;",
+     "p4_profile / p4_consent_log — onboarding answers and consent history;",
+     "p4_license / p4_trial_start / p4_sub_* — your license, trial, or subscription status;",
+     "p4_badges* — achievements; p4_custom_ex — exercises you added; p4_snapshots — rolling safety copies;",
+     "savedWorkout — the in-progress workout draft."
+    ]
+   },
+   {
+    "h": "Clearing",
+    "p": [
+     "Clearing site data in your browser deletes everything the App knows, permanently. Export a backup first — it is one tap."
+    ]
+   }
+  ]
+ },
+ "accessibility": {
+  "id": "accessibility",
+  "short": "Access",
+  "title": "Accessibility Statement",
+  "sections": [
+   {
+    "h": "Our target",
+    "p": [
+     "We aim for WCAG 2.1 AA on the App's core flows: navigation, workout generation, logging, and settings. The interface uses semantic buttons and labels, visible focus rings, text contrast above 4.5:1 in both themes, and touch targets of at least 44 by 44 pixels — 58 pixels or more in Gym Mode."
+    ]
+   },
+   {
+    "h": "Built-in supports",
+    "ul": [
+     "Gym Mode: giant targets, larger text, animations disabled — designed for busy hands and low-vision use;",
+     "Reading levels 1–10 re-word the interface from very simple to advanced English;",
+     "Respects your operating system's reduced-motion setting;",
+     "Works with browser zoom up to 200% and with common screen readers on standard flows."
+    ]
+   },
+   {
+    "h": "Known gaps",
+    "p": [
+     "Some legacy screens of the App still use click handlers that are less screen-reader friendly than we would like; charts are canvas-based and exposed only through text summaries. We are working through them. If something blocks you, email support@try4ever.com and we will prioritize the fix."
+    ]
+   }
+  ]
+ },
+ "minors": {
+  "id": "minors",
+  "short": "Minors",
+  "title": "Minor Protection & Parental Consent",
+  "sections": [
+   {
+    "h": "Age rules",
+    "p": [
+     "Under 13: the App is not intended for solo use; a parent or guardian should set it up and train together with the child. 13–17: allowed with guardian approval recorded at onboarding. 18+: standard onboarding."
+    ]
+   },
+   {
+    "h": "What changes for teens",
+    "p": [
+     "Guidance emphasizes technique, bodyweight mastery, and moderate loads; the waiver is signed by a guardian; reminders avoid appearance-focused language and focus on strength, energy, sleep, and mood."
+    ]
+   },
+   {
+    "h": "No data collection from minors",
+    "p": [
+     "Because all data stays on the device, we never receive a minor's profile or history. Guardians control (and can erase) everything locally."
+    ]
+   }
+  ]
+ },
+ "community": {
+  "id": "community",
+  "short": "Content",
+  "title": "Community & Content Policy",
+  "sections": [
+   {
+    "h": "Scope",
+    "p": [
+     "This policy covers content you create or import: custom exercises, notes, images, feedback, and phrasebooks. It applies to content you share with others (for example by exporting JSON) and to what you import."
+    ]
+   },
+   {
+    "h": "Be excellent",
+    "ul": [
+     "Do not create or share content that is hateful, harassing, sexually explicit, or that promotes dangerous practices (for example extreme dehydration, training through sharp pain, or unsupervised maximal lifts for children);",
+     "Do not import files from sources you do not trust — the App validates structure, but meaning is your responsibility;",
+     "Respect other people's work: do not strip attribution from libraries that include it."
+    ]
+   },
+   {
+    "h": "Enforcement",
+    "p": [
+     "We cannot see your local content. If you share content publicly (for example posting an exported library), the hosting platform's rules apply. Content that violates law or platform rules can be reported there."
+    ]
+   }
+  ]
+ },
+ "dmca": {
+  "id": "dmca",
+  "short": "DMCA",
+  "title": "Copyright & DMCA Policy",
+  "sections": [
+   {
+    "h": "Ownership",
+    "p": [
+     "The App file, its code, prompts, and design are © try4ever.com. Exercise names and general training instructions describe common knowledge and public-domain training practice; where a library includes creative expression (photographs, long-form guides), it carries its own attribution."
+    ]
+   },
+   {
+    "h": "Takedown requests",
+    "p": [
+     "If you believe content accessible via fitness.try4ever.com infringes your copyright, send a notice to support@try4ever.com including: identification of the work, the URL or file location, your contact information, a good-faith statement, and a statement made under penalty of perjury that you are authorized to act. We respond within 5 business days and remove apparently infringing material while we review."
+    ]
+   },
+   {
+    "h": "Counter-notices",
+    "p": [
+     "If your content was removed and you believe that was a mistake, reply explaining why; we restore content where the complainant does not pursue the matter."
+    ]
+   }
+  ]
+ },
+ "security": {
+  "id": "security",
+  "short": "Security",
+  "title": "Security & Vulnerability Disclosure",
+  "sections": [
+   {
+    "h": "Design posture",
+    "p": [
+     "The App is a client-side file: the strongest guarantees are what it does NOT do — no accounts, no server-side data store, no analytics. Client-side license checks are a convenience lock, not a cryptographic boundary; we say so plainly instead of pretending otherwise."
+    ]
+   },
+   {
+    "h": "Safe harbor",
+    "p": [
+     "If you research the App in good faith: we will not pursue legal action for careful, non-destructive research that respects other users. Please do not test against other people's devices or data."
+    ]
+   },
+   {
+    "h": "Reporting",
+    "p": [
+     "Email security@try4ever.com with steps to reproduce. We acknowledge within 5 business days and aim to fix client-side issues in the next release. We credit reporters (with permission) in release notes."
+    ]
+   },
+   {
+    "h": "Out of scope",
+    "ul": [
+     "Attacks that require physical access to an unlocked device;",
+     "Social engineering of our support inbox;",
+     "Automated scanning that degrades the CDN experience for others."
+    ]
+   }
+  ]
+ },
+ "contact": {
+  "id": "contact",
+  "short": "Contact",
+  "title": "Contact & Company Information",
+  "sections": [
+   {
+    "h": "Reach us",
+    "ul": [
+     "General support: support@try4ever.com (answers within 5 business days);",
+     "Billing and refunds: support@try4ever.com with your payment date and device ID;",
+     "Security: security@try4ever.com;",
+     "Free license applications: apply@try4ever.com;",
+     "Web: try4ever.com · App: fitness.try4ever.com"
+    ]
+   },
+   {
+    "h": "Operating identity",
+    "p": [
+     "The App is published by try4ever.com. References in these documents to \"we\", \"us\", and \"try4ever\" mean the operator of the try4ever.com domain and the App served from fitness.try4ever.com. Formal notices may be sent to the support address above with the subject line \"Legal Notice\"; we acknowledge legal notices within 5 business days and substantive responses follow within 15."
+    ]
+   },
+   {
+    "h": "Before you email",
+    "p": [
+     "Most answers live in the Legal Center and the FAQ on the plans page. For bugs, include what you tapped and what you expected — your local data never leaves your device unless you attach an export yourself."
+    ]
+   }
+  ]
+ }
+}

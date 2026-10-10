@@ -1,0 +1,132 @@
+[
+ {
+  "id": "strength",
+  "name": "Strength Coaching",
+  "icon": "fa-dumbbell"
+ },
+ {
+  "id": "physio",
+  "name": "Physical Therapy",
+  "icon": "fa-user-doctor"
+ },
+ {
+  "id": "sports_sci",
+  "name": "Exercise Science",
+  "icon": "fa-flask"
+ },
+ {
+  "id": "nutrition",
+  "name": "Sports Nutrition",
+  "icon": "fa-apple-whole"
+ },
+ {
+  "id": "sleep",
+  "name": "Sleep Coaching",
+  "icon": "fa-bed"
+ },
+ {
+  "id": "psychology",
+  "name": "Sport Psychology",
+  "icon": "fa-brain"
+ },
+ {
+  "id": "habits",
+  "name": "Habit Design",
+  "icon": "fa-calendar-check"
+ },
+ {
+  "id": "cardio",
+  "name": "Cardio Coaching",
+  "icon": "fa-heart-pulse"
+ },
+ {
+  "id": "endurance",
+  "name": "Endurance Coaching",
+  "icon": "fa-person-running"
+ },
+ {
+  "id": "mobility",
+  "name": "Mobility Work",
+  "icon": "fa-gymnast"
+ },
+ {
+  "id": "injury",
+  "name": "Injury Prevention",
+  "icon": "fa-bandage"
+ },
+ {
+  "id": "womens",
+  "name": "Women's Health",
+  "icon": "fa-venus"
+ },
+ {
+  "id": "older",
+  "name": "Older Adults",
+  "icon": "fa-person-cane"
+ },
+ {
+  "id": "teen",
+  "name": "Youth Fitness",
+  "icon": "fa-child-reaching"
+ },
+ {
+  "id": "adaptive",
+  "name": "Adaptive Training",
+  "icon": "fa-wheelchair"
+ },
+ {
+  "id": "pregnancy",
+  "name": "Prenatal Fitness",
+  "icon": "fa-baby-carriage"
+ },
+ {
+  "id": "hydration",
+  "name": "Hydration Science",
+  "icon": "fa-droplet"
+ },
+ {
+  "id": "recovery",
+  "name": "Recovery Methods",
+  "icon": "fa-battery-charging"
+ },
+ {
+  "id": "safety",
+  "name": "Gym Safety",
+  "icon": "fa-helmet-safety"
+ },
+ {
+  "id": "equipment",
+  "name": "Equipment Know-How",
+  "icon": "fa-screwdriver-wrench"
+ },
+ {
+  "id": "hygiene",
+  "name": "Gym Hygiene",
+  "icon": "fa-soap"
+ },
+ {
+  "id": "powerlifting",
+  "name": "Powerlifting",
+  "icon": "fa-weight-hanging"
+ },
+ {
+  "id": "bodybuilding",
+  "name": "Bodybuilding",
+  "icon": "fa-child-fighting"
+ },
+ {
+  "id": "calisthenics",
+  "name": "Calisthenics",
+  "icon": "fa-person-walking"
+ },
+ {
+  "id": "shiftwork",
+  "name": "Shift-Worker Fitness",
+  "icon": "fa-industry"
+ },
+ {
+  "id": "mindfulness",
+  "name": "Mind-Body Coaching",
+  "icon": "fa-spa"
+ }
+]

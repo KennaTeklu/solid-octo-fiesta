@@ -1,0 +1,22 @@
+# Build artifacts
+.gradle/
+build/
+app/build/
+local.properties
+
+# Kotlin compiler error logs (build diagnostics, never ship these)
+.kotlin/
+
+# Logs of any kind
+*.log
+
+# Signing material — the release keystore must NOT live in the source tree.
+# Keep it one level above source/ (keystore/debug.keystore) or in ~/.keys/.
+keystore/
+*.keystore
+*.jks
+
+# IDE
+.idea/
+*.iml
+.DS_Store

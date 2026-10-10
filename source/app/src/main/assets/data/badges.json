@@ -1,0 +1,1012 @@
+[
+ {
+  "id": "first_workout",
+  "icon": "fa-seedling",
+  "name": "First Rep",
+  "desc": "Complete your first workout.",
+  "check": {
+   "type": "workouts",
+   "value": 1
+  }
+ },
+ {
+  "id": "w3",
+  "icon": "fa-dumbbell",
+  "name": "Getting Moving",
+  "desc": "3 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 3
+  }
+ },
+ {
+  "id": "w5",
+  "icon": "fa-dumbbell",
+  "name": "Rhythm Found",
+  "desc": "5 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 5
+  }
+ },
+ {
+  "id": "w10",
+  "icon": "fa-dumbbell",
+  "name": "Double Digits",
+  "desc": "10 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "w25",
+  "icon": "fa-dumbbell",
+  "name": "Regular",
+  "desc": "25 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 25
+  }
+ },
+ {
+  "id": "w50",
+  "icon": "fa-dumbbell",
+  "name": "Fixture",
+  "desc": "50 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 50
+  }
+ },
+ {
+  "id": "w75",
+  "icon": "fa-dumbbell",
+  "name": "Iron Regular",
+  "desc": "75 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "w100",
+  "icon": "fa-hundred-points",
+  "name": "Century Club",
+  "desc": "100 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 100
+  }
+ },
+ {
+  "id": "w150",
+  "icon": "fa-medal",
+  "name": "Veteran",
+  "desc": "150 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 150
+  }
+ },
+ {
+  "id": "w200",
+  "icon": "fa-medal",
+  "name": "Iron Veteran",
+  "desc": "200 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 200
+  }
+ },
+ {
+  "id": "w250",
+  "icon": "fa-trophy",
+  "name": "Quarter Thousand",
+  "desc": "250 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 250
+  }
+ },
+ {
+  "id": "w365",
+  "icon": "fa-crown",
+  "name": "Full Year Strong",
+  "desc": "365 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 365
+  }
+ },
+ {
+  "id": "w500",
+  "icon": "fa-trophy",
+  "name": "Half Thousand",
+  "desc": "500 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 500
+  }
+ },
+ {
+  "id": "w1000",
+  "icon": "fa-gem",
+  "name": "The Long Game",
+  "desc": "1000 workouts done.",
+  "check": {
+   "type": "workouts",
+   "value": 1000
+  }
+ },
+ {
+  "id": "s2",
+  "icon": "fa-fire",
+  "name": "Warming Up",
+  "desc": "2-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 2
+  }
+ },
+ {
+  "id": "s3",
+  "icon": "fa-fire",
+  "name": "Three in a Row",
+  "desc": "3-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 3
+  }
+ },
+ {
+  "id": "s7",
+  "icon": "fa-fire",
+  "name": "Week of Fire",
+  "desc": "7-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 7
+  }
+ },
+ {
+  "id": "s14",
+  "icon": "fa-fire",
+  "name": "Fortnight Forge",
+  "desc": "14-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 14
+  }
+ },
+ {
+  "id": "s21",
+  "icon": "fa-fire",
+  "name": "Habit Locked",
+  "desc": "21-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 21
+  }
+ },
+ {
+  "id": "s30",
+  "icon": "fa-fire",
+  "name": "Month of Motion",
+  "desc": "30-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 30
+  }
+ },
+ {
+  "id": "s50",
+  "icon": "fa-fire",
+  "name": "Fifty Flame",
+  "desc": "50-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 50
+  }
+ },
+ {
+  "id": "s75",
+  "icon": "fa-fire",
+  "name": "Blaze Keeper",
+  "desc": "75-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 75
+  }
+ },
+ {
+  "id": "s100",
+  "icon": "fa-fire",
+  "name": "Hundred Heat",
+  "desc": "100-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 100
+  }
+ },
+ {
+  "id": "s150",
+  "icon": "fa-fire",
+  "name": "Eternal Ember",
+  "desc": "150-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 150
+  }
+ },
+ {
+  "id": "s200",
+  "icon": "fa-fire",
+  "name": "Two Hundred Torch",
+  "desc": "200-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 200
+  }
+ },
+ {
+  "id": "s365",
+  "icon": "fa-fire",
+  "name": "Year-Round Flame",
+  "desc": "365-day streak.",
+  "check": {
+   "type": "streak",
+   "value": 365
+  }
+ },
+ {
+  "id": "vol1000",
+  "icon": "fa-weight-hanging",
+  "name": "First Ton",
+  "desc": "1,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 1000
+  }
+ },
+ {
+  "id": "vol5000",
+  "icon": "fa-weight-hanging",
+  "name": "Five Ton Forge",
+  "desc": "5,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 5000
+  }
+ },
+ {
+  "id": "vol10000",
+  "icon": "fa-weight-hanging",
+  "name": "Ten Tonnage",
+  "desc": "10,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 10000
+  }
+ },
+ {
+  "id": "vol25000",
+  "icon": "fa-weight-hanging",
+  "name": "Mover",
+  "desc": "25,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 25000
+  }
+ },
+ {
+  "id": "vol50000",
+  "icon": "fa-weight-hanging",
+  "name": "Shifter",
+  "desc": "50,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 50000
+  }
+ },
+ {
+  "id": "vol100000",
+  "icon": "fa-weight-hanging",
+  "name": "Six Figures of Iron",
+  "desc": "100,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 100000
+  }
+ },
+ {
+  "id": "vol250000",
+  "icon": "fa-weight-hanging",
+  "name": "Quarter Million",
+  "desc": "250,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 250000
+  }
+ },
+ {
+  "id": "vol500000",
+  "icon": "fa-weight-hanging",
+  "name": "Half Million",
+  "desc": "500,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 500000
+  }
+ },
+ {
+  "id": "vol1000000",
+  "icon": "fa-weight-hanging",
+  "name": "Million Pound Club",
+  "desc": "1,000,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 1000000
+  }
+ },
+ {
+  "id": "vol2000000",
+  "icon": "fa-weight-hanging",
+  "name": "Beyond Millions",
+  "desc": "2,000,000 lbs moved in total.",
+  "check": {
+   "type": "volume",
+   "value": 2000000
+  }
+ },
+ {
+  "id": "tried5",
+  "icon": "fa-compass",
+  "name": "Sampler",
+  "desc": "Try 5 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 5
+  }
+ },
+ {
+  "id": "tried15",
+  "icon": "fa-compass",
+  "name": "Explorer",
+  "desc": "Try 15 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 15
+  }
+ },
+ {
+  "id": "tried30",
+  "icon": "fa-compass",
+  "name": "Pathfinder",
+  "desc": "Try 30 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 30
+  }
+ },
+ {
+  "id": "tried60",
+  "icon": "fa-compass",
+  "name": "Cartographer",
+  "desc": "Try 60 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 60
+  }
+ },
+ {
+  "id": "tried100",
+  "icon": "fa-compass",
+  "name": "Movement Collector",
+  "desc": "Try 100 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 100
+  }
+ },
+ {
+  "id": "tried200",
+  "icon": "fa-compass",
+  "name": "Library Legend",
+  "desc": "Try 200 different exercises.",
+  "check": {
+   "type": "tried",
+   "value": 200
+  }
+ },
+ {
+  "id": "pr1",
+  "icon": "fa-arrow-trend-up",
+  "name": "First PR",
+  "desc": "Set your first personal record.",
+  "check": {
+   "type": "prs",
+   "value": 1
+  }
+ },
+ {
+  "id": "pr5",
+  "icon": "fa-arrow-trend-up",
+  "name": "PR Collector",
+  "desc": "5 personal records set.",
+  "check": {
+   "type": "prs",
+   "value": 5
+  }
+ },
+ {
+  "id": "pr10",
+  "icon": "fa-arrow-trend-up",
+  "name": "Record Hunter",
+  "desc": "10 personal records set.",
+  "check": {
+   "type": "prs",
+   "value": 10
+  }
+ },
+ {
+  "id": "pr25",
+  "icon": "fa-arrow-trend-up",
+  "name": "Record Breaker",
+  "desc": "25 personal records set.",
+  "check": {
+   "type": "prs",
+   "value": 25
+  }
+ },
+ {
+  "id": "pr50",
+  "icon": "fa-arrow-trend-up",
+  "name": "Record Shatterer",
+  "desc": "50 personal records set.",
+  "check": {
+   "type": "prs",
+   "value": 50
+  }
+ },
+ {
+  "id": "pr100",
+  "icon": "fa-arrow-trend-up",
+  "name": "Living Record Book",
+  "desc": "100 personal records set.",
+  "check": {
+   "type": "prs",
+   "value": 100
+  }
+ },
+ {
+  "id": "bk1",
+  "icon": "fa-shield-halved",
+  "name": "Safety Net",
+  "desc": "Save your first backup.",
+  "check": {
+   "type": "backups",
+   "value": 1
+  }
+ },
+ {
+  "id": "bk5",
+  "icon": "fa-shield-halved",
+  "name": "Backup Habit",
+  "desc": "5 backups saved.",
+  "check": {
+   "type": "backups",
+   "value": 5
+  }
+ },
+ {
+  "id": "bk20",
+  "icon": "fa-shield-halved",
+  "name": "Data Guardian",
+  "desc": "20 backups saved.",
+  "check": {
+   "type": "backups",
+   "value": 20
+  }
+ },
+ {
+  "id": "add1",
+  "icon": "fa-plus",
+  "name": "Librarian",
+  "desc": "Add your first custom exercise.",
+  "check": {
+   "type": "studioAdds",
+   "value": 1
+  }
+ },
+ {
+  "id": "add5",
+  "icon": "fa-plus",
+  "name": "Curator",
+  "desc": "Add 5 custom exercises.",
+  "check": {
+   "type": "studioAdds",
+   "value": 5
+  }
+ },
+ {
+  "id": "add20",
+  "icon": "fa-plus",
+  "name": "Architect of Moves",
+  "desc": "Add 20 custom exercises.",
+  "check": {
+   "type": "studioAdds",
+   "value": 20
+  }
+ },
+ {
+  "id": "imp1",
+  "icon": "fa-file-import",
+  "name": "Bridge Builder",
+  "desc": "Import an exercise library for the first time.",
+  "check": {
+   "type": "imports",
+   "value": 1
+  }
+ },
+ {
+  "id": "imp5",
+  "icon": "fa-file-import",
+  "name": "Data Wrangler",
+  "desc": "Import 5 times.",
+  "check": {
+   "type": "imports",
+   "value": 5
+  }
+ },
+ {
+  "id": "exp1",
+  "icon": "fa-file-export",
+  "name": "Sharer",
+  "desc": "Export your library or data for the first time.",
+  "check": {
+   "type": "exports",
+   "value": 1
+  }
+ },
+ {
+  "id": "exp5",
+  "icon": "fa-file-export",
+  "name": "Open Book",
+  "desc": "Export 5 times.",
+  "check": {
+   "type": "exports",
+   "value": 5
+  }
+ },
+ {
+  "id": "early",
+  "icon": "fa-sun",
+  "name": "Early Bird",
+  "desc": "Train before 8 AM.",
+  "check": {
+   "type": "earlyBird",
+   "value": 0
+  }
+ },
+ {
+  "id": "owl",
+  "icon": "fa-moon",
+  "name": "Night Owl",
+  "desc": "Train after 9 PM.",
+  "check": {
+   "type": "nightOwl",
+   "value": 0
+  }
+ },
+ {
+  "id": "comeback",
+  "icon": "fa-phoenix",
+  "name": "The Comeback",
+  "desc": "Return to training after 3+ weeks away.",
+  "check": {
+   "type": "comeback",
+   "value": 0
+  }
+ },
+ {
+  "id": "gym1",
+  "icon": "fa-hand-fist",
+  "name": "Glove Mode",
+  "desc": "Try Gym Mode once.",
+  "check": {
+   "type": "gym",
+   "value": 1
+  }
+ },
+ {
+  "id": "gym10",
+  "icon": "fa-hand-fist",
+  "name": "Factory Hands",
+  "desc": "Use Gym Mode 10 sessions.",
+  "check": {
+   "type": "gym",
+   "value": 10
+  }
+ },
+ {
+  "id": "vocab1",
+  "icon": "fa-language",
+  "name": "Word Curious",
+  "desc": "Change your reading level once.",
+  "check": {
+   "type": "vocab",
+   "value": 1
+  }
+ },
+ {
+  "id": "vocab5",
+  "icon": "fa-language",
+  "name": "Word Collector",
+  "desc": "Try 5 different reading levels.",
+  "check": {
+   "type": "vocab",
+   "value": 5
+  }
+ },
+ {
+  "id": "theme1",
+  "icon": "fa-palette",
+  "name": "Paint the Gym",
+  "desc": "Change your accent color once.",
+  "check": {
+   "type": "themes",
+   "value": 1
+  }
+ },
+ {
+  "id": "theme5",
+  "icon": "fa-palette",
+  "name": "Chromatophore",
+  "desc": "Try 5 accent colors.",
+  "check": {
+   "type": "themes",
+   "value": 5
+  }
+ },
+ {
+  "id": "theme10",
+  "icon": "fa-palette",
+  "name": "Prism",
+  "desc": "Try 10 accent colors.",
+  "check": {
+   "type": "themes",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_cardio_endurance_10",
+  "icon": "fa-heart-pulse",
+  "name": "Cardio Endurance Apprentice",
+  "desc": "Train while Cardio Endurance is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_cardio_endurance_30",
+  "icon": "fa-heart-pulse",
+  "name": "Cardio Endurance Adept",
+  "desc": "Train while Cardio Endurance is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_cardio_endurance_75",
+  "icon": "fa-heart-pulse",
+  "name": "Cardio Endurance Master",
+  "desc": "Train while Cardio Endurance is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_muscular_strength_10",
+  "icon": "fa-dumbbell",
+  "name": "Strength Apprentice",
+  "desc": "Train while Strength is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_muscular_strength_30",
+  "icon": "fa-dumbbell",
+  "name": "Strength Adept",
+  "desc": "Train while Strength is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_muscular_strength_75",
+  "icon": "fa-dumbbell",
+  "name": "Strength Master",
+  "desc": "Train while Strength is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_muscular_endurance_10",
+  "icon": "fa-battery-full",
+  "name": "Muscle Endurance Apprentice",
+  "desc": "Train while Muscle Endurance is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_muscular_endurance_30",
+  "icon": "fa-battery-full",
+  "name": "Muscle Endurance Adept",
+  "desc": "Train while Muscle Endurance is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_muscular_endurance_75",
+  "icon": "fa-battery-full",
+  "name": "Muscle Endurance Master",
+  "desc": "Train while Muscle Endurance is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_flexibility_10",
+  "icon": "fa-gymnast",
+  "name": "Flexibility Apprentice",
+  "desc": "Train while Flexibility is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_flexibility_30",
+  "icon": "fa-gymnast",
+  "name": "Flexibility Adept",
+  "desc": "Train while Flexibility is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_flexibility_75",
+  "icon": "fa-gymnast",
+  "name": "Flexibility Master",
+  "desc": "Train while Flexibility is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_body_composition_10",
+  "icon": "fa-scale-balanced",
+  "name": "Body Composition Apprentice",
+  "desc": "Train while Body Composition is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_body_composition_30",
+  "icon": "fa-scale-balanced",
+  "name": "Body Composition Adept",
+  "desc": "Train while Body Composition is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_body_composition_75",
+  "icon": "fa-scale-balanced",
+  "name": "Body Composition Master",
+  "desc": "Train while Body Composition is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_power_10",
+  "icon": "fa-bolt",
+  "name": "Power Apprentice",
+  "desc": "Train while Power is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_power_30",
+  "icon": "fa-bolt",
+  "name": "Power Adept",
+  "desc": "Train while Power is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_power_75",
+  "icon": "fa-bolt",
+  "name": "Power Master",
+  "desc": "Train while Power is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_speed_10",
+  "icon": "fa-wind",
+  "name": "Speed Apprentice",
+  "desc": "Train while Speed is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_speed_30",
+  "icon": "fa-wind",
+  "name": "Speed Adept",
+  "desc": "Train while Speed is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_speed_75",
+  "icon": "fa-wind",
+  "name": "Speed Master",
+  "desc": "Train while Speed is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_agility_10",
+  "icon": "fa-running",
+  "name": "Agility Apprentice",
+  "desc": "Train while Agility is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_agility_30",
+  "icon": "fa-running",
+  "name": "Agility Adept",
+  "desc": "Train while Agility is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_agility_75",
+  "icon": "fa-running",
+  "name": "Agility Master",
+  "desc": "Train while Agility is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_balance_10",
+  "icon": "fa-person-swimming",
+  "name": "Balance Apprentice",
+  "desc": "Train while Balance is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_balance_30",
+  "icon": "fa-person-swimming",
+  "name": "Balance Adept",
+  "desc": "Train while Balance is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_balance_75",
+  "icon": "fa-person-swimming",
+  "name": "Balance Master",
+  "desc": "Train while Balance is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_coordination_10",
+  "icon": "fa-hands",
+  "name": "Coordination Apprentice",
+  "desc": "Train while Coordination is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_coordination_30",
+  "icon": "fa-hands",
+  "name": "Coordination Adept",
+  "desc": "Train while Coordination is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_coordination_75",
+  "icon": "fa-hands",
+  "name": "Coordination Master",
+  "desc": "Train while Coordination is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ },
+ {
+  "id": "comp_reaction_time_10",
+  "icon": "fa-stopwatch",
+  "name": "Reaction Apprentice",
+  "desc": "Train while Reaction is in focus 10 times.",
+  "check": {
+   "type": "workouts",
+   "value": 10
+  }
+ },
+ {
+  "id": "comp_reaction_time_30",
+  "icon": "fa-stopwatch",
+  "name": "Reaction Adept",
+  "desc": "Train while Reaction is in focus 30 times.",
+  "check": {
+   "type": "workouts",
+   "value": 30
+  }
+ },
+ {
+  "id": "comp_reaction_time_75",
+  "icon": "fa-stopwatch",
+  "name": "Reaction Master",
+  "desc": "Train while Reaction is in focus 75 times.",
+  "check": {
+   "type": "workouts",
+   "value": 75
+  }
+ }
+]

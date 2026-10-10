@@ -1,0 +1,136 @@
+================================================================================
+BATCH 4 — SETTINGS FULL PARITY — FIVE VERIFICATION COMMANDS
+versionCode 16 · versionName 1.4.6 · package com.peakform.fitness
+Cert SHA-256: 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953
+Run on 2026-10-09 01:57:52 UTC
+================================================================================
+
+=== 1. ./gradlew clean testReleaseUnitTest assembleRelease ===
+
+> Configure project :app
+WARNING: The option setting 'android.enableResourceOptimizations=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 9.0 of the Android Gradle plugin.
+
+> Task :app:clean
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:generateReleaseBuildConfig
+> Task :app:checkReleaseAarMetadata
+> Task :app:generateReleaseResValues
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:mergeReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:processReleaseResources
+> Task :app:kspReleaseKotlin
+> Task :app:compileReleaseKotlin
+w: file:///home/z/my-project/potential-dollop/source/app/src/main/java/com/peakform/fitness/core/Model.kt:38:64 This declaration needs opt-in. Its usage should be marked with '@kotlinx.serialization.ExperimentalSerializationApi' or '@OptIn(kotlinx.serialization.ExperimentalSerializationApi::class)'
+w: file:///home/z/my-project/potential-dollop/source/app/src/main/java/com/peakform/fitness/engine/Generator.kt:411:13 Condition is always 'false'.
+w: file:///home/z/my-project/potential-dollop/source/app/src/main/java/com/peakform/fitness/ui/screens/Workout.kt:144:121 'static field VIBRATOR_SERVICE: String' is deprecated. Deprecated in Java.
+
+> Task :app:javaPreCompileRelease
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:bundleReleaseClassesToRuntimeJar
+> Task :app:bundleReleaseClassesToCompileJar
+> Task :app:kspReleaseUnitTestKotlin
+
+> Task :app:compileReleaseUnitTestKotlin
+w: file:///home/z/my-project/potential-dollop/source/app/src/test/java/com/peakform/fitness/Batch2AScreenshots.kt:71:56 Java type mismatch: inferred type is 'kotlin.String?', but 'kotlin.String' was expected.
+w: file:///home/z/my-project/potential-dollop/source/app/src/test/java/com/peakform/fitness/Batch4SettingsScreenshots.kt:66:56 Java type mismatch: inferred type is 'kotlin.String?', but 'kotlin.String' was expected.
+
+> Task :app:preReleaseUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileReleaseUnitTest
+> Task :app:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:packageReleaseUnitTestForUnitTest
+> Task :app:generateReleaseUnitTestConfig
+> Task :app:processReleaseJavaRes
+> Task :app:processReleaseUnitTestJavaRes
+> Task :app:testReleaseUnitTest
+> Task :app:extractProguardFiles
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:lintVitalReportRelease
+> Task :app:lintVitalRelease
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseNativeLibs
+
+> Task :app:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
+
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:dexBuilderRelease
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseStartupProfile
+> Task :app:mergeExtDexRelease
+> Task :app:mergeDexRelease
+> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:compileReleaseArtProfile
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:mergeReleaseJavaResource
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:assembleRelease
+
+BUILD SUCCESSFUL in 4m 46s
+60 actionable tasks: 60 executed
+
+=== 2. aapt2 dump badging app/build/outputs/apk/release/app-release.apk | head -1 ===
+package: name='com.peakform.fitness' versionCode='16' versionName='1.4.6' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
+
+=== 3. apksigner verify --print-certs app/build/outputs/apk/release/app-release.apk ===
+Signer #1 certificate DN: CN=Android Debug, OU=Android, O=US, L=US, ST=US, C=US
+Signer #1 certificate SHA-256 digest: 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953
+Signer #1 certificate SHA-1 digest: 5d08264b44e0e53fbccc70b4f016474cc6c5ab5c
+Signer #1 certificate MD5 digest: ffd6314a83f267ac4f9407fd2e5a0480
+
+=== 4. sha256sum app/build/outputs/apk/release/app-release.apk ===
+c33f5506956bc233480e08dcf0c3e01fb756502e58cc78ef06e190a81cd3d7cc  app/build/outputs/apk/release/app-release.apk
+
+=== 5. python3 verify_apk.py app/build/outputs/apk/release/app-release.apk ===
+== 1. resources.arsc font table ==
+  PASS  arsc maps every res/font ttf  [arsc=['fa_brands', 'fa_regular', 'fa_solid', 'inter_400', 'inter_500', 'inter_600', 'inter_700', 'jetbrainsmono_400', 'jetbrainsmono_500', 'jetbrainsmono_700', 'spacegrotesk_500', 'spacegrotesk_600', 'spacegrotesk_700']]
+  PASS  no XML font descriptors in arsc
+== 2. code R.font references ==
+  PASS  no R.font.* references in code (asset-based pipeline)  [found []]
+== 3. bundled TTFs ==
+  PASS  assets/fonts has all 13 TTFs  [missing set()]
+  PASS  res/font has all 13 TTFs  [missing set()]
+  PASS  arsc maps every res/font file
+  PASS  all bundled TTFs have valid magic bytes  [[]]
+== 4. storage/compression ==
+  PASS  TTFs stored uncompressed  [[]]
+  PASS  resources.arsc present
+== 5. manifest ==
+  PASS  package com.peakform.fitness
+  PASS  versionCode 16  [16]
+  PASS  versionName 1.4.6  [1.4.6]
+  PASS  only VIBRATE permission (real)  [['android.permission.VIBRATE', 'android.permission.POST_NOTIFICATIONS', 'android.permission.health.WRITE_EXERCISE', 'android.permission.WAKE_LOCK', 'android.permission.ACCESS_NETWORK_STATE', 'android.permission.RECEIVE_BOOT_COMPLETED', 'android.permission.FOREGROUND_SERVICE', 'com.peakform.fitness.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION']]
+== 6. signature ==
+  PASS  apksigner verify
+  cert SHA-256: 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953
+== 7. zipalign ==
+  PASS  zipalign -c 4
+
+RESULT: ALL CHECKS PASSED

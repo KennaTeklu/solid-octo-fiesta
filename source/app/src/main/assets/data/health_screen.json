@@ -1,0 +1,73 @@
+{
+ "gen": [
+  {
+   "id": "g1",
+   "r": 1,
+   "t": "Has a doctor said you have a heart condition or high blood pressure?"
+  },
+  {
+   "id": "g2",
+   "r": 1,
+   "t": "Do you feel chest pain at rest or during activity?"
+  },
+  {
+   "id": "g3",
+   "r": 1,
+   "t": "Do you ever lose your balance from dizziness or faint?"
+  },
+  {
+   "id": "g4",
+   "r": 0,
+   "t": "Do you have a bone, joint, or back problem?"
+  },
+  {
+   "id": "g5",
+   "r": 0,
+   "t": "Do you take medication for blood pressure, heart, or blood thinning?"
+  },
+  {
+   "id": "g6",
+   "r": 0,
+   "t": "Are you pregnant, or have you given birth in the last 6 months?"
+  },
+  {
+   "id": "g7",
+   "r": 0,
+   "t": "Any other reason a doctor said you should not exercise?"
+  }
+ ],
+ "fup": {
+  "fu_heart": [
+   {
+    "id": "h1",
+    "t": "Has your doctor limited your activity, or said your condition is not well-controlled?"
+   },
+   {
+    "id": "h2",
+    "t": "Have you had a heart attack, heart failure, or a cardiac procedure in the last 3 months?"
+   }
+  ],
+  "fu_meds": [
+   {
+    "id": "m1",
+    "t": "Have you started or changed this medication in the last month?"
+   }
+  ],
+  "fu_preg": [
+   {
+    "id": "p1",
+    "t": "Has your obstetric provider cleared you for moderate exercise?"
+   }
+  ]
+ },
+ "joints": [
+  "Shoulder",
+  "Elbow",
+  "Wrist",
+  "Lower back",
+  "Hip",
+  "Knee",
+  "Ankle",
+  "Neck"
+ ]
+}

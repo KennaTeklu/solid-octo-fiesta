@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="start_workout"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_pro"
+        android:shortcutShortLabel="@string/shortcut_start"
+        android:shortcutLongLabel="@string/shortcut_start_long">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.peakform.fitness"
+            android:targetClass="com.peakform.fitness.MainActivity" />
+        <extra android:name="section" android:value="workout" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="resume"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_pro"
+        android:shortcutShortLabel="@string/shortcut_resume"
+        android:shortcutLongLabel="@string/shortcut_resume_long">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.peakform.fitness"
+            android:targetClass="com.peakform.fitness.MainActivity" />
+        <extra android:name="section" android:value="workout" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="backup"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_pro"
+        android:shortcutShortLabel="@string/shortcut_backup"
+        android:shortcutLongLabel="@string/shortcut_backup_long">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.peakform.fitness"
+            android:targetClass="com.peakform.fitness.MainActivity" />
+        <extra android:name="section" android:value="settings" />
+    </shortcut>
+</shortcuts>

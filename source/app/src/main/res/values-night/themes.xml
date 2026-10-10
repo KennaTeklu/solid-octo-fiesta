@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Night theme overrides — the base theme is already transparent so we don't
-         need to redefine it. The file is kept so resource merging doesn't break. -->
-</resources>

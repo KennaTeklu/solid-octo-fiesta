@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Fallback accent when dynamic color is off or unavailable -->
-    <color name="accent_default">#FF1B6B5A</color>
-    <color name="accent_container_default">#FFB5E5D6</color>
-    <color name="highlight_sentence">#FFFFF2A8</color>
-    <color name="highlight_sentence_dark">#FF5C4A1E</color>
-    <color name="ic_launcher_background">#FF1B6B5A</color>
+    <color name="pro_window_bg">#FF07090D</color>
 </resources>
