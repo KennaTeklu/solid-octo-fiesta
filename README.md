@@ -1,4 +1,4 @@
-﻿# Reader — native Android TTS reader
+# Reader — native Android TTS reader
 
 Personal-use text-to-speech reader for Android. A clean rebuild of @Voice Aloud Reader without the ads, trackers, license checks, or anti-tamper.
 
@@ -55,3 +55,11 @@ Full list in SPEC.md. Build order in BATCHES.md.
 4. BATCHES.md — the plan, in order
 5. ACCEPTANCE.md — how a delivery is judged
 6. source/ — the current code
+
+---
+
+## License
+
+Proprietary. Personal, non-commercial use only. See [`LICENSE`](./LICENSE)
+for the full terms. Commercial use is prohibited without prior written
+permission.
