@@ -1,4 +1,4 @@
-﻿# BATCHES.md — Reader build plan
+# BATCHES.md — Reader build plan
 
 Twenty batches across seven phases. Each is a complete delivery. versionCode increments by exactly 1 per batch. Cert always 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953.
 
@@ -36,21 +36,28 @@ Verify: open a 500-page PDF. Progress appears within 1 second. Bar fills smoothl
 
 ---
 
-## Batch 3 — Reader core polish
+## Batch 3 — TTS & voice configuration (shipped)
 
-IDs: RD-01, RD-02, RD-05, RD-08..RD-10, LIB-01..LIB-03, LIB-05, LIB-07, ADD-01..ADD-04, PB-01..PB-03, PB-11, PB-13, PB-14, BM-01..BM-04, SET-01, SET-07, SET-17, THEME-01, THEME-04, THEME-07, DEV-02, DEV-06, INT-05, INT-06
-Experts: 55 (Reading UX), 58 (Highlighting), 9 (Foreground Service), 10 (Notifications), 61 (Gesture Design)
+IDs: TTS-01, TTS-04, TTS-05, TTS-06, VOICE-01, VOICE-02, VOICE-03, VOICE-04, PB-05, PB-06, PB-07, PB-08, SET-03, INT-10
+Experts: 20 (TTS Engine Integration), 21 (Custom TTS Author), 22 (Audio Focus/Ducking)
 
-Scope:
-- Library screen with continue-reading card, add FAB, empty state
-- Add Content sheet with file picker, paste, URL fetch, share-receive
-- Reader screen with sentence highlight, tap-to-jump, full-screen mode, progress bar
-- Playback bar: play/pause, prev/next sentence, bookmark, notification
-- Bookmarks: create position, list, jump
-- Settings shell with reader basics, theme basics
-- Theme: day/night/system, reader font size, primary colours
+versionCode 3, versionName 1.0.2, hash B5AFB119. Shipped.
 
-Verify: open a TXT, read aloud, tap a sentence to jump, bookmark a spot, resume after kill, dark mode toggle applies instantly.
+Scope (shipped):
+- Voice picker — searchable list, grouped by language and engine
+- TTS engine picker — Google, Samsung, any installed engine
+- Missing-voice prompt — Play Store link + alternative voice
+- Voice sliders — rate 0.5x–3.0x, pitch, volume independent of media
+- Expanded playback bar — speed/pitch/volume with live effect
+- Settings Voice group, Advanced subsection, Cloud voices subsection
+- Encrypted cloud API key storage (INT-10, wired in Batch 8)
+
+Note: the reader-core-polish IDs originally planned for this slot
+(RD-01, RD-02, RD-05, RD-08..RD-10, LIB-01..LIB-03, LIB-05, LIB-07,
+ADD-01..ADD-04, PB-01..PB-03, PB-11, PB-13, PB-14, BM-01..BM-04,
+SET-01, SET-07, SET-17, THEME-01, THEME-04, THEME-07, DEV-02,
+DEV-06, INT-05, INT-06) are re-slotted into later batches. See the
+Phase 2 and Phase 5 sections where those IDs now appear.
 
 ---
 
